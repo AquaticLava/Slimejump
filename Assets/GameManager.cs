@@ -4,13 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.InteropServices;
 using TMPro;
+using Unity.Mathematics;
 
 public class GameManager : MonoBehaviour
 {
     public Canvas canvas;
-    public GameObject nameObject;
+    public GameObject playerObject;
     private PlayerJoin[] playerJoins;
     public TMP_Text roomCodeStart;
+    public GameObject spawnPoint;
     
 
     // Madder functions that you may call
@@ -150,8 +152,7 @@ public class GameManager : MonoBehaviour
         }
 
         // Create player name on canvas
-        GameObject name = Instantiate(nameObject, canvas.transform);
-        name.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
+        GameObject name = Instantiate(playerObject, new Vector3(0,0,0), Quaternion.identity);
         name.GetComponent<NameScript>().SetName(playerJoin.name);
         
         // Add player to playerJoins array
@@ -231,9 +232,9 @@ public class GameManager : MonoBehaviour
         // Move player based on joystick
         foreach (Transform child in canvas.transform)
         {
-            if (child.GetComponent<NameScript>().GetName() == controllerState.name)
+            if (child.GetComponent<SlimeScript>().GetPlayerName() == controllerState.name)
             {
-                child.GetComponent<NameScript>().UpdateXY(controllerState.joystick.x, controllerState.joystick.y);
+                child.GetComponent<SlimeScript>().UpdateX(controllerState.joystick.x);
             }
         }
     }

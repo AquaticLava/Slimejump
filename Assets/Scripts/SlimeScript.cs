@@ -15,27 +15,27 @@ public class SlimeScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerNameText.text = "bob";
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            slimeRigidbody2D.velocity += Vector2.right * strafeStrength;
-        }
-
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            slimeRigidbody2D.velocity += Vector2.left * strafeStrength;
-        }
-
-        if (Input.GetKeyDown(KeyCode.W) && onGround)
-        {
-            slimeRigidbody2D.velocity += Vector2.up * jumpStrength;
-            onGround = false;
-        }
+        // if (Input.GetKeyDown(KeyCode.D))
+        // {
+        //     slimeRigidbody2D.velocity += Vector2.right * strafeStrength;
+        // }
+        //
+        // if (Input.GetKeyDown(KeyCode.A))
+        // {
+        //     slimeRigidbody2D.velocity += Vector2.left * strafeStrength;
+        // }
+        //
+        // if (Input.GetKeyDown(KeyCode.W) && onGround)
+        // {
+        //     slimeRigidbody2D.velocity += Vector2.up * jumpStrength;
+        //     onGround = false;
+        // }
         if (playerTransform != null && playerNameText != null)
         {
             // Set the text position to be above the player's head
@@ -53,6 +53,29 @@ public class SlimeScript : MonoBehaviour
         {
             slimeRigidbody2D.velocity += Vector2.up * jumpStrength;
             onGround = false;
+        }
+    }
+
+    public void SetPlayerNameText(string playerJoinName)
+    {
+        playerNameText.text = playerJoinName;
+    }
+
+    public string GetPlayerName()
+    {
+        return playerNameText.text;
+    }
+
+    public void UpdateX(int joystickX)
+    {
+        if (joystickX < 0)
+        {
+            slimeRigidbody2D.velocity += Vector2.right * strafeStrength;
+        }
+
+        if (joystickX > 0)
+        {
+            slimeRigidbody2D.velocity += Vector2.left * strafeStrength;
         }
     }
 }

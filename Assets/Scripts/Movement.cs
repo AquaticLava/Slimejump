@@ -43,7 +43,6 @@ public class Movement : MonoBehaviour
             // Check if the platform has reached the current target
             if (countDone == 12)
             {
-                Debug.Log(Vector3.Distance(transform.position, currentTarget.position).ToString());
                 countDone = 0;
             }
             if (Vector3.Distance(transform.position, currentTarget.position) < 0.01f)
